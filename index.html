@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matematyka — Szybka ściągawka przed sprawdzianem</title>
+<title>Matematyka — Interaktywna ściągawka</title>
 <style>
   :root {
     --bg: #070b14;
-    --bg-gradient: radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.12), transparent 35%),
-                   radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.10), transparent 40%);
-    --card: rgba(30, 41, 59, 0.65);
-    --card-border: rgba(148, 163, 184, 0.15);
+    --bg-gradient: radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.13), transparent 35%),
+                   radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.11), transparent 40%);
+    --card: rgba(30, 41, 59, 0.68);
+    --card-border: rgba(148, 163, 184, 0.16);
     --accent: #38bdf8;
     --accent-soft: rgba(56, 189, 248, 0.15);
     --purple: #c084fc;
@@ -21,7 +21,6 @@
     --muted: #94a3b8;
   }
 
-  html { scroll-behavior: smooth; }
   * { box-sizing: border-box; }
 
   body {
@@ -38,73 +37,73 @@
   .container { max-width: 860px; margin: 0 auto; }
 
   /* Hero Header */
-  .hero {
-    padding: 28px 0 18px 0;
-    text-align: left;
-  }
+  .hero { padding: 24px 0 16px 0; }
   .hero-badge {
     display: inline-block;
     background: var(--accent-soft);
     color: var(--accent);
     border: 1px solid rgba(56, 189, 248, 0.3);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     padding: 4px 12px;
     border-radius: 999px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .hero h1 {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
     font-weight: 800;
-    margin: 0 0 6px 0;
+    margin: 0 0 4px 0;
     background: linear-gradient(90deg, #ffffff 0%, #93c5fd 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .hero p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.98rem;
-  }
+  .hero p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
-  /* Sticky Glass Nav */
-  .nav-wrap {
-    position: sticky;
-    top: 10px;
-    z-index: 100;
-    margin-bottom: 26px;
-  }
-  .nav {
+  /* Real Interactive Tabs */
+  .tabs {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    background: rgba(15, 23, 42, 0.82);
+    background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     padding: 8px;
     border-radius: 14px;
     border: 1px solid rgba(148, 163, 184, 0.2);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    margin-bottom: 24px;
   }
-  .nav a {
-    color: #e2e8f0;
-    text-decoration: none;
-    padding: 9px 12px;
+  .tab-btn {
+    background: rgba(30, 41, 59, 0.55);
+    border: 1px solid transparent;
+    color: #cbd5e1;
+    padding: 10px 14px;
     border-radius: 10px;
     font-weight: 600;
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     flex: 1;
-    text-align: center;
-    min-width: 140px;
+    min-width: 150px;
+    cursor: pointer;
     transition: all 0.2s ease;
-    background: rgba(30, 41, 59, 0.5);
   }
-  .nav a:hover {
-    background: var(--accent);
+  .tab-btn:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #fff;
+  }
+  .tab-btn.active {
+    background: linear-gradient(135deg, #38bdf8, #60a5fa);
     color: #070b14;
-    transform: translateY(-1px);
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+  }
+
+  .tab-panel { display: none; animation: fadeIn 0.22s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* Section Titles */
@@ -112,8 +111,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 36px 0 16px 0;
-    scroll-margin-top: 85px;
+    margin: 0 0 16px 0;
   }
   .sec-num {
     width: 34px;
@@ -128,51 +126,78 @@
     font-size: 1rem;
     flex-shrink: 0;
   }
-  .sec-header h2 {
-    margin: 0;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #fff;
-  }
+  .sec-header h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: #fff; }
 
-  /* Rule Card + Visual */
+  /* Interactive Graph + Rule Card */
   .rule-card {
-    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
     border: 1px solid rgba(56, 189, 248, 0.35);
     border-radius: 16px;
     padding: 18px 20px;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .rule-grid {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 16px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
     align-items: center;
   }
-  @media (max-width: 650px) {
-    .rule-card { grid-template-columns: 1fr; }
+  @media (max-width: 680px) {
+    .rule-grid { grid-template-columns: 1fr; }
   }
   .rule-card h3 {
     margin: 0 0 10px 0;
     color: var(--amber);
     font-size: 1.05rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
   .rule-list {
     margin: 0;
     padding-left: 18px;
     color: #e2e8f0;
-    font-size: 0.94rem;
+    font-size: 0.93rem;
   }
   .rule-list li { margin-bottom: 6px; }
-  .rule-svg {
-    background: rgba(7, 11, 20, 0.7);
-    border: 1px solid rgba(148, 163, 184, 0.15);
+
+  .graph-box {
+    background: #070b14;
+    border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 12px;
-    padding: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  canvas {
+    width: 100%;
+    max-width: 320px;
+    height: 210px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+  .sliders {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 0.84rem;
+    color: #cbd5e1;
+  }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .slider-row input[type="range"] { flex: 1; accent-color: var(--accent); cursor: pointer; }
+  .graph-status {
+    margin-top: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--green);
+    background: rgba(52, 211, 153, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
   }
 
   /* Problem Cards */
@@ -182,10 +207,6 @@
     border-radius: 16px;
     padding: 16px 20px;
     margin-bottom: 14px;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-  .item:hover {
-    border-color: rgba(56, 189, 248, 0.4);
   }
   .item-head {
     display: flex;
@@ -195,12 +216,7 @@
     flex-wrap: wrap;
     margin-bottom: 8px;
   }
-  .num {
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
-  }
+  .num { font-weight: 700; color: var(--accent); font-size: 0.9rem; }
   .ans-pill {
     background: var(--green-soft);
     color: var(--green);
@@ -210,12 +226,7 @@
     font-weight: 700;
     font-size: 0.88rem;
   }
-  .q-text {
-    font-weight: 600;
-    font-size: 1.02rem;
-    color: #fff;
-    margin-bottom: 10px;
-  }
+  .q-text { font-weight: 600; font-size: 1.02rem; color: #fff; margin-bottom: 10px; }
   .math {
     font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
     background: rgba(15, 23, 42, 0.85);
@@ -241,71 +252,64 @@
   <div class="hero">
     <div class="hero-badge">Poziom podstawowy • Powtórka</div>
     <h1>Ściągawka przed sprawdzianem</h1>
-    <p>Najważniejsze schematy, zadania z arkuszy (6.6–6.17) oraz nierówności z gotowymi rozwiązaniami.</p>
+    <p>Kliknij zakładkę, sprawdź wykres na żywo i przejrzyj gotowe rozwiązania krok po kroku.</p>
   </div>
 
-  <div class="nav-wrap">
-    <nav class="nav">
-      <a href="#funkcja-liniowa">1. Funkcja liniowa</a>
-      <a href="#nierownosci-liniowe">2. Nierówności liniowe</a>
-      <a href="#nierownosci-kwadratowe">3. Nierówności kwadratowe</a>
-      <a href="#ulamki-logarytmy">4. Ułamki i logarytmy</a>
-    </nav>
+  <!-- TAB BUTTONS -->
+  <div class="tabs" id="tabBar">
+    <button class="tab-btn active" data-target="tab1">1. Funkcja liniowa (6.6–6.17)</button>
+    <button class="tab-btn" data-target="tab2">2. Nierówności liniowe</button>
+    <button class="tab-btn" data-target="tab3">3. Nierówności kwadratowe</button>
+    <button class="tab-btn" data-target="tab4">4. Ułamki, moduły i logarytmy</button>
   </div>
 
-  <!-- SEKCJA 1: FUNKCJA LINIOWA -->
-  <div id="funkcja-liniowa" class="sec-header">
-    <div class="sec-num">1</div>
-    <h2>Funkcja liniowa (Zadania 6.6 – 6.17)</h2>
-  </div>
-
-  <div class="rule-card">
-    <div>
-      <h3>⚡ Wzór ogólny: <span class="math">f(x) = ax + b</span></h3>
-      <ul class="rule-list">
-        <li><b>a &gt; 0</b> → funkcja <b>rosnąca</b> (idzie w górę). <b>a &lt; 0</b> → <b>malejąca</b> (idzie w dół).</li>
-        <li><b>b</b> → punkt przecięcia z osią <b>OY</b> (nad osią OX: <b>b &gt; 0</b>, pod osią: <b>b &lt; 0</b>).</li>
-        <li><b>Miejsce zerowe</b> → podstaw <b>f(x) = 0</b> i wylicz <b>x</b> (punkt na osi OX).</li>
-      </ul>
+  <!-- ================= TAB 1: FUNKCJA LINIOWA ================= -->
+  <div id="tab1" class="tab-panel active">
+    <div class="sec-header">
+      <div class="sec-num">1</div>
+      <h2>Funkcja liniowa: <span class="math">f(x) = ax + b</span></h2>
     </div>
-    <div class="rule-svg">
-      <svg width="150" height="115" viewBox="0 0 150 115">
-        <line x1="10" y1="58" x2="140" y2="58" stroke="#64748b" stroke-width="1.5"/>
-        <line x1="75" y1="10" x2="75" y2="105" stroke="#64748b" stroke-width="1.5"/>
-        <line x1="25" y1="100" x2="130" y2="20" stroke="#38bdf8" stroke-width="2.5"/>
-        <circle cx="75" cy="62" r="4" fill="#fbbf24"/>
-        <text x="82" y="72" fill="#fbbf24" font-size="11" font-weight="bold">b</text>
-        <text x="115" y="18" fill="#38bdf8" font-size="11" font-weight="bold">a &gt; 0</text>
-        <text x="132" y="53" fill="#94a3b8" font-size="10">x</text>
-        <text x="80" y="16" fill="#94a3b8" font-size="10">y</text>
-      </svg>
+
+    <div class="rule-card">
+      <div class="rule-grid">
+        <div>
+          <h3>⚡ Przesuń suwaki i zobacz jak działa wykres</h3>
+          <ul class="rule-list">
+            <li><b>a &gt; 0</b> → funkcja <b>rosnąca</b> (prosta idzie w górę).</li>
+            <li><b>a &lt; 0</b> → funkcja <b>malejąca</b> (prosta idzie w dół).</li>
+            <li><b>b</b> → punkt przecięcia z osią <b>OY</b> (żółta kropka).</li>
+            <li><b>Miejsce zerowe</b> → punkt przecięcia z osią <b>OX</b> (zielona kropka, <span class="math">f(x) = 0</span>).</li>
+          </ul>
+        </div>
+        <div class="graph-box">
+          <canvas id="lineCanvas" width="320" height="210"></canvas>
+          <div class="sliders">
+            <div class="slider-row">
+              <span>Nachylenie <b>a = <span id="lblA">1</span></b></span>
+              <input type="range" id="inA" min="-3" max="3" step="0.5" value="1">
+            </div>
+            <div class="slider-row">
+              <span>Przesunięcie <b>b = <span id="lblB">-1</span></b></span>
+              <input type="range" id="inB" min="-4" max="4" step="1" value="-1">
+            </div>
+          </div>
+          <div class="graph-status" id="lineStatus">Rosnąca (a &gt; 0), b &lt; 0</div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <div class="item-head"><span class="num">Zadanie 6.6</span><span class="ans-pill">Odpowiedź: B</span></div>
-    <div class="q-text">Wskaż wykres funkcji liniowej <span class="math">f(x) = ax + b</span>, gdzie <span class="math">a &gt; 0</span> i <span class="math">b &lt; 0</span>.</div>
-    <div class="sol"><b>Krok po kroku:</b> Skoro <b>a &gt; 0</b>, prosta rośnie (idzie w górę). Skoro <b>b &lt; 0</b>, przecina oś OY poniżej zera. Pasuje wyłącznie wykres <b>B</b>.</div>
-  </div>
+    <div class="item">
+      <div class="item-head"><span class="num">Zadanie 6.6</span><span class="ans-pill">Odpowiedź: B</span></div>
+      <div class="q-text">Wskaż wykres funkcji liniowej <span class="math">f(x) = ax + b</span>, gdzie <span class="math">a &gt; 0</span> i <span class="math">b &lt; 0</span>.</div>
+      <div class="sol"><b>Krok po kroku:</b> Skoro <b>a &gt; 0</b>, prosta rośnie (idzie w górę). Skoro <b>b &lt; 0</b>, przecina oś OY poniżej zera. Pasuje wykres <b>B</b>.</div>
+    </div>
 
-  <div class="item">
-    <div class="item-head"><span class="num">Zadanie 6.7</span><span class="ans-pill">Odpowiedź: D (m = 4)</span></div>
-    <div class="q-text">Punkt <span class="math">A = (0, 1)</span> leży na wykresie <span class="math">f(x) = (m - 2)x + m - 3</span>. Oblicz <span class="math">m</span>.</div>
-    <div class="sol"><b>Krok po kroku:</b> Podstawiamy <b>x = 0</b> oraz <b>y = 1</b>: <span class="math">1 = (m - 2)·0 + m - 3</span> → <span class="math">1 = m - 3</span> → <b>m = 4</b>.</div>
-  </div>
+    <div class="item">
+      <div class="item-head"><span class="num">Zadanie 6.7</span><span class="ans-pill">Odpowiedź: D (m = 4)</span></div>
+      <div class="q-text">Punkt <span class="math">A = (0, 1)</span> leży na wykresie <span class="math">f(x) = (m - 2)x + m - 3</span>. Oblicz <span class="math">m</span>.</div>
+      <div class="sol"><b>Krok po kroku:</b> Podstawiamy <b>x = 0</b> oraz <b>y = 1</b>: <span class="math">1 = (m - 2)·0 + m - 3</span> → <span class="math">1 = m - 3</span> → <b>m = 4</b>.</div>
+    </div>
 
-  <div class="item">
-    <div class="item-head"><span class="num">Zadanie 6.8</span><span class="ans-pill">Odpowiedź: B (a &lt; 0 i b &gt; 0)</span></div>
-    <div class="q-text">Na rysunku prosta opada w dół i przecina oś OY powyżej zera. Jakie znaki mają <span class="math">a</span> i <span class="math">b</span>?</div>
-    <div class="sol"><b>Krok po kroku:</b> Prosta opada w dół (malejąca) → <b>a &lt; 0</b>. Przecina oś OY nad osią OX → <b>b &gt; 0</b>.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-head"><span class="num">Zadanie 6.9</span><span class="ans-pill">Odpowiedź: B. m ∈ (-2, 2)</span></div>
-    <div class="q-text">Funkcja liniowa <span class="math">f(x) = (m² - 4)x + 2</span> jest malejąca, gdy...</div>
-    <div class="sol"><b>Krok po kroku:</b> Funkcja jest malejąca, gdy współczynnik przy x jest ujemny: <span class="math">m² - 4 &lt; 0</span> → <span class="math">m² &lt; 4</span> → <b>m ∈ (-2, 2)</b>.</div>
-  </div>
-
-  <div class="item">
-    <div class="item-head"><span class="num">Zadanie 6.10</span><span class="ans-pill">Odpowiedź: A. f(x) = -1/3 x + 7/3</span></div>
-    <div class="q-text">Wiadomo, że <span class="math">f(1) = 2</span> oraz punkt <span class="math">P = (-2, 3)</span> należy do wykresu. Wyznacz wzór funkcji.</div>
+    <div class="item">
+      <div class="item-head"><span class="num">Zadanie 6.8</span><span class="ans-pill">Odpowiedź: B (a &lt; 0 i b &gt; 0)</span></div>
+      <div class="q-text">Na rysunku prosta opada w dół i przecina oś OY powyżej zera. Jakie znaki mają <span class="math">a</span> i <span class="math">b</span>?</div>
