@@ -3,212 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matematyka — Interaktywna ściągawka</title>
+<title>Matematyka — Kompletna ściągawka przed sprawdzianem</title>
 <style>
   :root {
-    --bg: #070b14;
-    --bg-gradient: radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.13), transparent 35%),
-                   radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.11), transparent 40%);
-    --card: rgba(30, 41, 59, 0.68);
-    --card-border: rgba(148, 163, 184, 0.16);
-    --accent: #38bdf8;
-    --accent-soft: rgba(56, 189, 248, 0.15);
-    --purple: #c084fc;
-    --green: #34d399;
-    --green-soft: rgba(52, 211, 153, 0.14);
-    --amber: #fbbf24;
-    --text: #f8fafc;
-    --muted: #94a3b8;
+    --bg: #0b0f19;
+    --surface: #131926;
+    --surface-2: #1a2234;
+    --border: rgba(255, 255, 255, 0.09);
+    --primary: #3b82f6;
+    --primary-glow: rgba(59, 130, 246, 0.25);
+    --cyan: #22d3ee;
+    --emerald: #10b981;
+    --emerald-bg: rgba(16, 185, 129, 0.12);
+    --amber: #f59e0b;
+    --rose: #f43f5e;
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
   }
 
   * { box-sizing: border-box; }
 
   body {
-    background-color: var(--bg);
-    background-image: var(--bg-gradient);
-    background-attachment: fixed;
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
     margin: 0;
-    padding: 0 16px 60px 16px;
-    line-height: 1.6;
+    padding: 0 16px 80px;
+    background: var(--bg);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.14) 0px, transparent 45%),
+      radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.10) 0px, transparent 45%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    line-height: 1.55;
   }
 
-  .container { max-width: 860px; margin: 0 auto; }
+  .wrap { max-width: 920px; margin: 0 auto; }
 
-  /* Hero Header */
-  .hero { padding: 24px 0 16px 0; }
-  .hero-badge {
-    display: inline-block;
-    background: var(--accent-soft);
-    color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    font-size: 0.76rem;
+  /* Header */
+  header {
+    padding: 28px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 22px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cyan);
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.25);
     padding: 4px 12px;
     border-radius: 999px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
-  .hero h1 {
-    font-size: 1.75rem;
+  h1 {
+    margin: 0 0 6px;
+    font-size: 1.85rem;
     font-weight: 800;
-    margin: 0 0 4px 0;
-    background: linear-gradient(90deg, #ffffff 0%, #93c5fd 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .hero p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-
-  /* Real Interactive Tabs */
-  .tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 8px;
-    border-radius: 14px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-    margin-bottom: 24px;
-  }
-  .tab-btn {
-    background: rgba(30, 41, 59, 0.55);
-    border: 1px solid transparent;
-    color: #cbd5e1;
-    padding: 10px 14px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.88rem;
-    flex: 1;
-    min-width: 150px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .tab-btn:hover {
-    border-color: rgba(56, 189, 248, 0.4);
+    letter-spacing: -0.02em;
     color: #fff;
   }
-  .tab-btn.active {
-    background: linear-gradient(135deg, #38bdf8, #60a5fa);
-    color: #070b14;
-    font-weight: 700;
-    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+  header p { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+
+  /* PURE CSS TABS (100% работают без JS) */
+  .tab-radio { display: none; }
+
+  .tab-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background: var(--surface);
+    padding: 6px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    position: sticky;
+    top: 10px;
+    z-index: 50;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  }
+  @media (max-width: 700px) {
+    .tab-labels { grid-template-columns: repeat(2, 1fr); }
   }
 
-  .tab-panel { display: none; animation: fadeIn 0.22s ease; }
-  .tab-panel.active { display: block; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
+  .tab-labels label {
+    text-align: center;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+  }
+  .tab-labels label:hover { color: #fff; background: rgba(255,255,255,0.04); }
+
+  #r1:checked ~ .tab-labels label[for="r1"],
+  #r2:checked ~ .tab-labels label[for="r2"],
+  #r3:checked ~ .tab-labels label[for="r3"],
+  #r4:checked ~ .tab-labels label[for="r4"] {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px var(--primary-glow);
+  }
+
+  .panel { display: none; animation: slideUp 0.25s ease; }
+  #r1:checked ~ #p1,
+  #r2:checked ~ #p2,
+  #r3:checked ~ #p3,
+  #r4:checked ~ #p4 { display: block; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Section Titles */
-  .sec-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 16px 0;
-  }
-  .sec-num {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #38bdf8, #818cf8);
-    color: #070b14;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-  .sec-header h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: #fff; }
-
-  /* Interactive Graph + Rule Card */
-  .rule-card {
-    background: linear-gradient(145deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    border-radius: 16px;
-    padding: 18px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  }
-  .rule-grid {
+  /* Section & Theory Grid */
+  .theory-grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
-    gap: 18px;
-    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
   }
-  @media (max-width: 680px) {
-    .rule-grid { grid-template-columns: 1fr; }
+  @media (max-width: 740px) {
+    .theory-grid { grid-template-columns: 1fr; }
   }
-  .rule-card h3 {
-    margin: 0 0 10px 0;
-    color: var(--amber);
-    font-size: 1.05rem;
-  }
-  .rule-list {
-    margin: 0;
-    padding-left: 18px;
-    color: #e2e8f0;
-    font-size: 0.93rem;
-  }
-  .rule-list li { margin-bottom: 6px; }
 
-  .graph-box {
-    background: #070b14;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    border-radius: 12px;
-    padding: 10px;
-    text-align: center;
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
   }
-  canvas {
-    width: 100%;
-    max-width: 320px;
-    height: 210px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
+  .card h2 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .sliders {
+
+  .formula-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 10px;
-    text-align: left;
-    font-size: 0.84rem;
-    color: #cbd5e1;
+    gap: 10px;
   }
-  .slider-row {
+  .formula-list li {
+    background: var(--surface-2);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    border-left: 3px solid var(--primary);
+  }
+  .formula-list b { color: #fff; }
+
+  /* Interactive SVG Graph Box */
+  .graph-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .svg-wrap {
+    background: #080c14;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+  }
+  svg { width: 100%; max-width: 300px; height: auto; display: block; }
+
+  .controls { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .ctrl-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
   }
-  .slider-row input[type="range"] { flex: 1; accent-color: var(--accent); cursor: pointer; }
-  .graph-status {
-    margin-top: 8px;
+  .ctrl-row b { color: #fff; min-width: 65px; }
+  .ctrl-row input[type="range"] { flex: 1; accent-color: var(--primary); cursor: pointer; }
+  .status-bar {
+    margin-top: 10px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: var(--emerald-bg);
+    color: var(--emerald);
     font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--green);
-    background: rgba(52, 211, 153, 0.1);
-    padding: 4px 8px;
-    border-radius: 6px;
+    font-weight: 700;
+    text-align: center;
   }
 
-  /* Problem Cards */
-  .item {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 14px;
+  /* Task Cards */
+  .sec-divider {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin: 24px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .item-head {
+  .sec-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .task {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .task:hover { border-color: rgba(59, 130, 246, 0.45); }
+
+  .task-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -216,100 +243,100 @@
     flex-wrap: wrap;
     margin-bottom: 8px;
   }
-  .num { font-weight: 700; color: var(--accent); font-size: 0.9rem; }
-  .ans-pill {
-    background: var(--green-soft);
-    color: var(--green);
-    border: 1px solid rgba(52, 211, 153, 0.4);
+  .task-id {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cyan);
+  }
+  .ans {
+    background: var(--emerald-bg);
+    color: var(--emerald);
+    border: 1px solid rgba(16, 185, 129, 0.35);
     padding: 3px 12px;
     border-radius: 999px;
+    font-size: 0.85rem;
     font-weight: 700;
-    font-size: 0.88rem;
   }
-  .q-text { font-weight: 600; font-size: 1.02rem; color: #fff; margin-bottom: 10px; }
-  .math {
-    font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
-    background: rgba(15, 23, 42, 0.85);
+  .q {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  code, .m {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    background: #090d16;
+    border: 1px solid rgba(255,255,255,0.07);
     padding: 2px 6px;
     border-radius: 6px;
-    color: #bae6fd;
-    font-size: 0.94em;
+    color: #93c5fd;
+    font-size: 0.92em;
   }
-  .sol {
-    background: rgba(7, 11, 20, 0.65);
-    border-left: 3px solid var(--purple);
-    padding: 11px 14px;
+  .step {
+    background: #0b101b;
+    border-left: 3px solid var(--emerald);
+    padding: 10px 14px;
     border-radius: 0 10px 10px 0;
-    font-size: 0.93rem;
+    font-size: 0.92rem;
     color: #cbd5e1;
   }
-  .sol b { color: #f8fafc; }
+  .step b { color: #fff; }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 
-  <div class="hero">
-    <div class="hero-badge">Poziom podstawowy • Powtórka</div>
-    <h1>Ściągawka przed sprawdzianem</h1>
-    <p>Kliknij zakładkę, sprawdź wykres na żywo i przejrzyj gotowe rozwiązania krok po kroku.</p>
+  <header>
+    <div class="pill">Matematyka • Poziom podstawowy</div>
+    <h1>Kompletna ściągawka przed sprawdzianem</h1>
+    <p>Wszystkie najważniejsze wzory, interaktywne wykresy oraz gotowe rozwiązania zadań z arkuszy.</p>
+  </header>
+
+  <!-- PURE CSS TAB CONTROLS -->
+  <input type="radio" name="tabs" id="r1" class="tab-radio" checked>
+  <input type="radio" name="tabs" id="r2" class="tab-radio">
+  <input type="radio" name="tabs" id="r3" class="tab-radio">
+  <input type="radio" name="tabs" id="r4" class="tab-radio">
+
+  <div class="tab-labels">
+    <label for="r1">1. Funkcja liniowa (6.6–6.17)</label>
+    <label for="r2">2. Nierówności i równania</label>
+    <label for="r3">3. Kwadratowe i wielomiany</label>
+    <label for="r4">4. Ułamki, moduły, logarytmy</label>
   </div>
 
-  <!-- TAB BUTTONS -->
-  <div class="tabs" id="tabBar">
-    <button class="tab-btn active" data-target="tab1">1. Funkcja liniowa (6.6–6.17)</button>
-    <button class="tab-btn" data-target="tab2">2. Nierówności liniowe</button>
-    <button class="tab-btn" data-target="tab3">3. Nierówności kwadratowe</button>
-    <button class="tab-btn" data-target="tab4">4. Ułamki, moduły i logarytmy</button>
-  </div>
-
-  <!-- ================= TAB 1: FUNKCJA LINIOWA ================= -->
-  <div id="tab1" class="tab-panel active">
-    <div class="sec-header">
-      <div class="sec-num">1</div>
-      <h2>Funkcja liniowa: <span class="math">f(x) = ax + b</span></h2>
-    </div>
-
-    <div class="rule-card">
-      <div class="rule-grid">
-        <div>
-          <h3>⚡ Przesuń suwaki i zobacz jak działa wykres</h3>
-          <ul class="rule-list">
-            <li><b>a &gt; 0</b> → funkcja <b>rosnąca</b> (prosta idzie w górę).</li>
-            <li><b>a &lt; 0</b> → funkcja <b>malejąca</b> (prosta idzie w dół).</li>
-            <li><b>b</b> → punkt przecięcia z osią <b>OY</b> (żółta kropka).</li>
-            <li><b>Miejsce zerowe</b> → punkt przecięcia z osią <b>OX</b> (zielona kropka, <span class="math">f(x) = 0</span>).</li>
-          </ul>
-        </div>
-        <div class="graph-box">
-          <canvas id="lineCanvas" width="320" height="210"></canvas>
-          <div class="sliders">
-            <div class="slider-row">
-              <span>Nachylenie <b>a = <span id="lblA">1</span></b></span>
-              <input type="range" id="inA" min="-3" max="3" step="0.5" value="1">
-            </div>
-            <div class="slider-row">
-              <span>Przesunięcie <b>b = <span id="lblB">-1</span></b></span>
-              <input type="range" id="inB" min="-4" max="4" step="1" value="-1">
-            </div>
-          </div>
-          <div class="graph-status" id="lineStatus">Rosnąca (a &gt; 0), b &lt; 0</div>
-        </div>
+  <!-- ==================== PANEL 1: FUNKCJA LINIOWA ==================== -->
+  <div id="p1" class="panel">
+    <div class="theory-grid">
+      <div class="card">
+        <h2>📐 Zasady: <span class="m">f(x) = ax + b</span></h2>
+        <ul class="formula-list">
+          <li><b>Monotoniczność (współczynnik a):</b><br>
+            <span class="m">a &gt; 0</span> → funkcja <b>rosnąca</b> (idzie w górę)<br>
+            <span class="m">a &lt; 0</span> → funkcja <b>malejąca</b> (idzie w dół)<br>
+            <span class="m">a = 0</span> → funkcja <b>stała</b> (pozioma)</li>
+          <li><b>Przecięcie z osią OY (współczynnik b):</b><br>
+            Punkt <span class="m">(0, b)</span>. Nad osią OX → <span class="m">b &gt; 0</span>; pod osią → <span class="m">b &lt; 0</span>.</li>
+          <li><b>Miejsce zerowe (<span class="m">x₀</span>):</b><br>
+            Podstaw <span class="m">f(x) = 0</span> → <span class="m">ax + b = 0</span> → <span class="m">x₀ = -b / a</span>.</li>
+          <li><b>Symetrie wykresu:</b><br>
+            Względem osi <b>OX</b>: <span class="m">g(x) = -f(x)</span> (zmieniasz wszystkie znaki)<br>
+            Względem punktu <b>(0,0)</b>: <span class="m">g(x) = -f(-x)</span></li>
+        </ul>
       </div>
-    </div>
 
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.6</span><span class="ans-pill">Odpowiedź: B</span></div>
-      <div class="q-text">Wskaż wykres funkcji liniowej <span class="math">f(x) = ax + b</span>, gdzie <span class="math">a &gt; 0</span> i <span class="math">b &lt; 0</span>.</div>
-      <div class="sol"><b>Krok po kroku:</b> Skoro <b>a &gt; 0</b>, prosta rośnie (idzie w górę). Skoro <b>b &lt; 0</b>, przecina oś OY poniżej zera. Pasuje wykres <b>B</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.7</span><span class="ans-pill">Odpowiedź: D (m = 4)</span></div>
-      <div class="q-text">Punkt <span class="math">A = (0, 1)</span> leży na wykresie <span class="math">f(x) = (m - 2)x + m - 3</span>. Oblicz <span class="math">m</span>.</div>
-      <div class="sol"><b>Krok po kroku:</b> Podstawiamy <b>x = 0</b> oraz <b>y = 1</b>: <span class="math">1 = (m - 2)·0 + m - 3</span> → <span class="math">1 = m - 3</span> → <b>m = 4</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.8</span><span class="ans-pill">Odpowiedź: B (a &lt; 0 i b &gt; 0)</span></div>
-      <div class="q-text">Na rysunku prosta opada w dół i przecina oś OY powyżej zera. Jakie znaki mają <span class="math">a</span> i <span class="math">b</span>?</div>
+      <div class="graph-panel">
+        <div class="svg-wrap">
+          <svg viewBox="0 0 260 220" id="svgLine">
+            <!-- Grid -->
+            <g stroke="#1e293b" stroke-width="1">
+              <line x1="30" y1="10" x2="30" y2="210"/><line x1="55" y1="10" x2="55" y2="210"/>
+              <line x1="80" y1="10" x2="80" y2="210"/><line x1="105" y1="10" x2="105" y2="210"/>
+              <line x1="155" y1="10" x2="155" y2="210"/><line x1="180" y1="10" x2="180" y2="210"/>
+              <line x1="205" y1="10" x2="205" y2="210"/><line x1="230" y1="10" x2="230" y2="210"/>
+              <line x1="10" y1="35" x2="250" y2="35"/><line x1="10" y1="60" x2="250" y2="60"/>
+              <line x1="10" y1="85" x2="250" y2="85"/><line x1="10" y1="135" x2="250" y2="135"/>
+              <line x1="10" y1="160" x2="250" y2="160"/><line x1="10" y1="185" x2="250" y2="185"/>
+            </g>
+            <!-- Axes (center 130, 110, scale = 25px) -->
+            <line x1="10" y1="110" x2="250" y2="110" stroke="#64748b" stroke-width="1.5"/>
