@@ -3,164 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ściągawka przed sprawdzianem z matematyki</title>
+<title>Matematyka — Szybka ściągawka przed sprawdzianem</title>
 <style>
   :root {
-    --bg: #0f172a;
-    --card: #1e293b;
+    --bg: #070b14;
+    --bg-gradient: radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.12), transparent 35%),
+                   radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.10), transparent 40%);
+    --card: rgba(30, 41, 59, 0.65);
+    --card-border: rgba(148, 163, 184, 0.15);
     --accent: #38bdf8;
-    --green: #22c55e;
-    --yellow: #facc15;
-    --text: #f1f5f9;
+    --accent-soft: rgba(56, 189, 248, 0.15);
+    --purple: #c084fc;
+    --green: #34d399;
+    --green-soft: rgba(52, 211, 153, 0.14);
+    --amber: #fbbf24;
+    --text: #f8fafc;
     --muted: #94a3b8;
   }
-  * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  body { background: var(--bg); color: var(--text); margin: 0; padding: 16px; line-height: 1.5; }
-  .container { max-width: 840px; margin: 0 auto; }
-  header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-  h1 { font-size: 1.35rem; margin: 0; color: var(--accent); }
-  .toggle-btn {
-    background: var(--accent); color: #0f172a; border: none; padding: 8px 14px;
-    border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9rem;
+
+  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0 16px 60px 16px;
+    line-height: 1.6;
   }
-  .tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-  .tab {
-    background: var(--card); border: 1px solid #334155; color: var(--text);
-    padding: 9px 12px; border-radius: 9px; cursor: pointer; font-weight: 600; font-size: 0.9rem; flex: 1; text-align: center; min-width: 130px;
+
+  .container { max-width: 860px; margin: 0 auto; }
+
+  /* Hero Header */
+  .hero {
+    padding: 28px 0 18px 0;
+    text-align: left;
   }
-  .tab.active { background: #334155; border-color: var(--accent); color: var(--accent); }
-  .section { display: none; }
-  .section.active { display: block; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: 1.85rem;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    background: linear-gradient(90deg, #ffffff 0%, #93c5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  /* Sticky Glass Nav */
+  .nav-wrap {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    margin-bottom: 26px;
+  }
+  .nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: rgba(15, 23, 42, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 8px;
+    border-radius: 14px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+  .nav a {
+    color: #e2e8f0;
+    text-decoration: none;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.86rem;
+    flex: 1;
+    text-align: center;
+    min-width: 140px;
+    transition: all 0.2s ease;
+    background: rgba(30, 41, 59, 0.5);
+  }
+  .nav a:hover {
+    background: var(--accent);
+    color: #070b14;
+    transform: translateY(-1px);
+  }
+
+  /* Section Titles */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 16px 0;
+    scroll-margin-top: 85px;
+  }
+  .sec-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: #070b14;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .sec-header h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* Rule Card + Visual */
   .rule-card {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
   }
-  .rule-card h3 { margin: 0 0 8px 0; color: var(--yellow); font-size: 1.05rem; }
-  .rule-card p { margin: 4px 0; font-size: 0.95rem; }
+  @media (max-width: 650px) {
+    .rule-card { grid-template-columns: 1fr; }
+  }
+  .rule-card h3 {
+    margin: 0 0 10px 0;
+    color: var(--amber);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rule-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #e2e8f0;
+    font-size: 0.94rem;
+  }
+  .rule-list li { margin-bottom: 6px; }
+  .rule-svg {
+    background: rgba(7, 11, 20, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Problem Cards */
   .item {
-    background: var(--card); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px;
-    border-left: 4px solid var(--green);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
-  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .num { font-weight: 700; color: var(--accent); font-size: 0.95rem; }
+  .item:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+  }
+  .item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .num {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
   .ans-pill {
-    background: rgba(34, 197, 94, 0.18); color: #86efac; border: 1px solid var(--green);
-    padding: 2px 10px; border-radius: 99px; font-weight: 700; font-size: 0.9rem;
+    background: var(--green-soft);
+    color: var(--green);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.88rem;
   }
-  .q-text { margin: 6px 0; font-weight: 600; font-size: 1rem; }
+  .q-text {
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .math {
+    font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #bae6fd;
+    font-size: 0.94em;
+  }
   .sol {
-    background: #0f172a; padding: 10px 12px; border-radius: 8px; font-size: 0.93rem; color: #e2e8f0; margin-top: 8px;
+    background: rgba(7, 11, 20, 0.65);
+    border-left: 3px solid var(--purple);
+    padding: 11px 14px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.93rem;
+    color: #cbd5e1;
   }
-  body.hide-sol .sol, body.hide-sol .ans-pill { filter: blur(6px); user-select: none; }
+  .sol b { color: #f8fafc; }
 </style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1>Poranna ściągawka: zadania + gotowe rozwiązania</h1>
-    <button class="toggle-btn" onclick="document.body.classList.toggle('hide-sol')">Ukryj / Pokaż odpowiedzi</button>
-  </header>
 
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('t1', this)">Funkcja liniowa (6.6–6.17)</div>
-    <div class="tab" onclick="showTab('t2', this)">Nierówności liniowe</div>
-    <div class="tab" onclick="showTab('t3', this)">Nierówności kwadratowe</div>
-    <div class="tab" onclick="showTab('t4', this)">Ułamki, pierwiastki i logarytmy</div>
+  <div class="hero">
+    <div class="hero-badge">Poziom podstawowy • Powtórka</div>
+    <h1>Ściągawka przed sprawdzianem</h1>
+    <p>Najważniejsze schematy, zadania z arkuszy (6.6–6.17) oraz nierówności z gotowymi rozwiązaniami.</p>
   </div>
 
-  <!-- TAB 1: FUNKCJA LINIOWA -->
-  <div id="t1" class="section active">
-    <div class="rule-card">
-      <h3>Zapamiętaj w 30 sekund: f(x) = ax + b</h3>
-      <p>• <b>a &gt; 0</b> → funkcja <b>rosnąca</b> (prosta idzie w górę). <b>a &lt; 0</b> → funkcja <b>malejąca</b> (prosta idzie w dół).</p>
-      <p>• <b>b</b> → punkt przecięcia z osią <b>OY</b>. Nad osią OX → <b>b &gt; 0</b>, pod osią OX → <b>b &lt; 0</b>.</p>
-      <p>• <b>Miejsce zerowe</b> → podstaw <b>f(x) = 0</b> i wylicz <b>x</b> (punkt przecięcia z osią OX).</p>
-    </div>
+  <div class="nav-wrap">
+    <nav class="nav">
+      <a href="#funkcja-liniowa">1. Funkcja liniowa</a>
+      <a href="#nierownosci-liniowe">2. Nierówności liniowe</a>
+      <a href="#nierownosci-kwadratowe">3. Nierówności kwadratowe</a>
+      <a href="#ulamki-logarytmy">4. Ułamki i logarytmy</a>
+    </nav>
+  </div>
 
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.6</span><span class="ans-pill">Odpowiedź: B</span></div>
-      <div class="q-text">Wskaż wykres funkcji liniowej f(x) = ax + b, gdzie a &gt; 0 i b &lt; 0.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Skoro a &gt; 0, prosta rośnie (idzie w górę). Skoro b &lt; 0, przecina oś OY poniżej zera. Pasuje rysunek <b>B</b>.</div>
-    </div>
+  <!-- SEKCJA 1: FUNKCJA LINIOWA -->
+  <div id="funkcja-liniowa" class="sec-header">
+    <div class="sec-num">1</div>
+    <h2>Funkcja liniowa (Zadania 6.6 – 6.17)</h2>
+  </div>
 
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.7</span><span class="ans-pill">Odpowiedź: D (m = 4)</span></div>
-      <div class="q-text">Punkt A = (0, 1) leży na wykresie funkcji liniowej f(x) = (m - 2)x + m - 3. Oblicz m.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Podstawiamy x = 0 oraz y = 1 do wzoru: 1 = (m - 2)·0 + m - 3 → 1 = m - 3 → <b>m = 4</b>.</div>
+  <div class="rule-card">
+    <div>
+      <h3>⚡ Wzór ogólny: <span class="math">f(x) = ax + b</span></h3>
+      <ul class="rule-list">
+        <li><b>a &gt; 0</b> → funkcja <b>rosnąca</b> (idzie w górę). <b>a &lt; 0</b> → <b>malejąca</b> (idzie w dół).</li>
+        <li><b>b</b> → punkt przecięcia z osią <b>OY</b> (nad osią OX: <b>b &gt; 0</b>, pod osią: <b>b &lt; 0</b>).</li>
+        <li><b>Miejsce zerowe</b> → podstaw <b>f(x) = 0</b> i wylicz <b>x</b> (punkt na osi OX).</li>
+      </ul>
     </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.8</span><span class="ans-pill">Odpowiedź: B (a &lt; 0 i b &gt; 0)</span></div>
-      <div class="q-text">Na rysunku prosta opada w dół i przecina oś OY powyżej zera. Jakie znaki mają a i b?</div>
-      <div class="sol"><b>Rozwiązanie:</b> Prosta opada w dół (funkcja malejąca) → <b>a &lt; 0</b>. Przecina oś OY nad osią OX → <b>b &gt; 0</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.9</span><span class="ans-pill">Odpowiedź: B. m ∈ (-2, 2)</span></div>
-      <div class="q-text">Funkcja liniowa f(x) = (m² - 4)x + 2 jest malejąca, gdy...</div>
-      <div class="sol"><b>Rozwiązanie:</b> Funkcja jest malejąca, gdy współczynnik przy x jest ujemny: m² - 4 &lt; 0 → m² &lt; 4 → m leży między -2 a 2: <b>m ∈ (-2, 2)</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.10</span><span class="ans-pill">Odpowiedź: A. f(x) = -1/3 x + 7/3</span></div>
-      <div class="q-text">Wiadomo, że f(1) = 2 oraz punkt P = (-2, 3) należy do wykresu. Wyznacz wzór funkcji f.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Mamy dwa punkty: (1, 2) i (-2, 3). Liczymy a = (3 - 2) / (-2 - 1) = -1/3. Podstawiamy (1, 2) do y = -1/3x + b: 2 = -1/3 + b → <b>b = 7/3</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.11</span><span class="ans-pill">Odpowiedź: A. ⟨-10, 2⟩</span></div>
-      <div class="q-text">Funkcja f(x) = 3x - 4 jest określona dla x ∈ ⟨-2, 2⟩. Wyznacz zbiór wartości.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Podstawiamy krańce przedziału: f(-2) = 3(-2) - 4 = <b>-10</b> oraz f(2) = 3(2) - 4 = <b>2</b>. Przedział jest domknięty: <b>⟨-10, 2⟩</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.12</span><span class="ans-pill">Odpowiedź: D (a &gt; 0 i b &lt; 0)</span></div>
-      <div class="q-text">Funkcja f(x) = ax + b jest rosnąca i ma dodatnie miejsce zerowe.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Rosnąca → <b>a &gt; 0</b>. Aby prosta idąca w górę przecięła oś OX na prawo od zera, musi zaczynać się pod osią OX → <b>b &lt; 0</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.13</span><span class="ans-pill">Odpowiedź: B (m = 0)</span></div>
-      <div class="q-text">Na wykresie f(x) = (m - 1)x + 3 leży punkt S = (5, -2). Oblicz m.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Podstawiamy x = 5 i y = -2: -2 = (m - 1)·5 + 3 → -5 = 5(m - 1) → m - 1 = -1 → <b>m = 0</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.14</span><span class="ans-pill">Odpowiedź: C (b = -8/3)</span></div>
-      <div class="q-text">Funkcja f(x) = 2x + b ma takie samo miejsce zerowe, jakie ma g(x) = -3x + 4. Oblicz b.</div>
-      <div class="sol"><b>Rozwiązanie:</b> Miejsce zerowe g: -3x + 4 = 0 → x = 4/3. Podstawiamy x = 4/3 do f(x) = 0: 2·(4/3) + b = 0 → 8/3 + b = 0 → <b>b = -8/3</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.15</span><span class="ans-pill">Odpowiedź: B. g(x) = 2x - 2</span></div>
-      <div class="q-text">Na rysunku f(x) = -2x + 2. Wykres g jest symetryczny do f względem osi poziomej (OX).</div>
-      <div class="sol"><b>Rozwiązanie:</b> Symetria względem osi OX zmienia znak całego wzoru: g(x) = -f(x) = -(-2x + 2) = <b>2x - 2</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.16</span><span class="ans-pill">Odpowiedź: A. m &lt; -2/3</span></div>
-      <div class="q-text">Miejsce zerowe funkcji f(x) = x + 3m jest większe od 2 dla każdego m spełniającego warunek...</div>
-      <div class="sol"><b>Rozwiązanie:</b> Miejsce zerowe: x + 3m = 0 → x = -3m. Warunek: -3m &gt; 2. Dzielimy przez -3 (zmieniamy znak nierówności!): <b>m &lt; -2/3</b>.</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 6.17</span><span class="ans-pill">Odpowiedź: A. g(x) = 2x + 2</span></div>
-      <div class="q-text">f(0) = -2 i f(1) = 0 (czyli f(x) = 2x - 2). Wykres g jest symetryczny względem początku układu (0, 0).</div>
-      <div class="sol"><b>Rozwiązanie:</b> Symetria względem (0, 0) zmienia znak przy x oraz przy całym wzorze: g(x) = -f(-x) = -(2(-x) - 2) = <b>2x + 2</b>.</div>
+    <div class="rule-svg">
+      <svg width="150" height="115" viewBox="0 0 150 115">
+        <line x1="10" y1="58" x2="140" y2="58" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="75" y1="10" x2="75" y2="105" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="25" y1="100" x2="130" y2="20" stroke="#38bdf8" stroke-width="2.5"/>
+        <circle cx="75" cy="62" r="4" fill="#fbbf24"/>
+        <text x="82" y="72" fill="#fbbf24" font-size="11" font-weight="bold">b</text>
+        <text x="115" y="18" fill="#38bdf8" font-size="11" font-weight="bold">a &gt; 0</text>
+        <text x="132" y="53" fill="#94a3b8" font-size="10">x</text>
+        <text x="80" y="16" fill="#94a3b8" font-size="10">y</text>
+      </svg>
     </div>
   </div>
 
-  <!-- TAB 2: NIERÓWNOŚCI LINIOWE -->
-  <div id="t2" class="section">
-    <div class="rule-card">
-      <h3>Główna zasada dla nierówności liniowych</h3>
-      <p>Rozwiązujesz jak zwykłe równanie, ALE: <b>gdy dzielisz lub mnożysz obie strony przez liczbę ujemną — odwracasz znak nierówności (&lt; zmienia się na &gt;)</b>.</p>
-    </div>
+  <div class="item">
+    <div class="item-head"><span class="num">Zadanie 6.6</span><span class="ans-pill">Odpowiedź: B</span></div>
+    <div class="q-text">Wskaż wykres funkcji liniowej <span class="math">f(x) = ax + b</span>, gdzie <span class="math">a &gt; 0</span> i <span class="math">b &lt; 0</span>.</div>
+    <div class="sol"><b>Krok po kroku:</b> Skoro <b>a &gt; 0</b>, prosta rośnie (idzie w górę). Skoro <b>b &lt; 0</b>, przecina oś OY poniżej zera. Pasuje wyłącznie wykres <b>B</b>.</div>
+  </div>
 
-    <div class="item">
-      <div class="item-head"><span class="num">Zadanie 5.42</span><span class="ans-pill">Odpowiedź: B (6)</span></div>
-      <div class="q-text">Podaj największą liczbę całkowitą spełniającą nierówność: x/4 - √3 &lt; 0</div>
-      <div class="sol"><b>Rozwiązanie:</b> x/4 &lt; √3 → x &lt; 4√3. Szacujemy: √3 ≈ 1,73, więc 4 · 1,73 = 6,92. Największa liczba całkowita mniejsza od 6,92 to <b>6</b>.</div>
-    </div>
+  <div class="item">
+    <div class="item-head"><span class="num">Zadanie 6.7</span><span class="ans-pill">Odpowiedź: D (m = 4)</span></div>
+    <div class="q-text">Punkt <span class="math">A = (0, 1)</span> leży na wykresie <span class="math">f(x) = (m - 2)x + m - 3</span>. Oblicz <span class="math">m</span>.</div>
+    <div class="sol"><b>Krok po kroku:</b> Podstawiamy <b>x = 0</b> oraz <b>y = 1</b>: <span class="math">1 = (m - 2)·0 + m - 3</span> → <span class="math">1 = m - 3</span> → <b>m = 4</b>.</div>
+  </div>
 
-    <div class="item">
+  <div class="item">
+    <div class="item-head"><span class="num">Zadanie 6.8</span><span class="ans-pill">Odpowiedź: B (a &lt; 0 i b &gt; 0)</span></div>
+    <div class="q-text">Na rysunku prosta opada w dół i przecina oś OY powyżej zera. Jakie znaki mają <span class="math">a</span> i <span class="math">b</span>?</div>
+    <div class="sol"><b>Krok po kroku:</b> Prosta opada w dół (malejąca) → <b>a &lt; 0</b>. Przecina oś OY nad osią OX → <b>b &gt; 0</b>.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head"><span class="num">Zadanie 6.9</span><span class="ans-pill">Odpowiedź: B. m ∈ (-2, 2)</span></div>
+    <div class="q-text">Funkcja liniowa <span class="math">f(x) = (m² - 4)x + 2</span> jest malejąca, gdy...</div>
+    <div class="sol"><b>Krok po kroku:</b> Funkcja jest malejąca, gdy współczynnik przy x jest ujemny: <span class="math">m² - 4 &lt; 0</span> → <span class="math">m² &lt; 4</span> → <b>m ∈ (-2, 2)</b>.</div>
+  </div>
+
+  <div class="item">
+    <div class="item-head"><span class="num">Zadanie 6.10</span><span class="ans-pill">Odpowiedź: A. f(x) = -1/3 x + 7/3</span></div>
+    <div class="q-text">Wiadomo, że <span class="math">f(1) = 2</span> oraz punkt <span class="math">P = (-2, 3)</span> należy do wykresu. Wyznacz wzór funkcji.</div>
