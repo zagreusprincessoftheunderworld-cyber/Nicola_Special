@@ -3,134 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ściągawka — Matematyka</title>
+<title>Matematyka — Powtórka (Wykładnicza, Logarytmy, Kombinatoryka)</title>
 <style>
-*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-body{background:#090d16;color:#f1f5f9;margin:0;padding:14px 14px 50px;line-height:1.45}
-.wrap{max-width:820px;margin:0 auto}
-h1{font-size:1.5rem;margin:0 0 4px;color:#fff}
-.sub{color:#94a3b8;margin:0 0 14px;font-size:.9rem}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px;position:sticky;top:6px;z-index:50;background:#090d16;padding:6px 0}
-@media(max-width:600px){.tabs{grid-template-columns:repeat(2,1fr)}}
-.tab{background:#131b2e;border:1px solid #263352;color:#94a3b8;padding:9px 6px;border-radius:9px;font-weight:700;font-size:.83rem;cursor:pointer}
-.tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
-.page{display:none}.page.active{display:block}
-.box{background:#131b2e;border:1px solid #263352;border-radius:12px;padding:14px;margin-bottom:14px}
-.box h2{margin:0 0 8px;font-size:1.05rem;color:#fbbf24}
-.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:center}
-@media(max-width:680px){.grid{grid-template-columns:1fr}}
-.rules{margin:0;padding-left:18px;font-size:.9rem;color:#e2e8f0}
-.rules li{margin-bottom:5px}
-.gbox{background:#060911;border:1px solid #263352;border-radius:10px;padding:10px}
-svg{width:100%;height:190px;display:block}
-.sl{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#19233c;padding:6px 10px;border-radius:7px;margin-top:6px;font-size:.83rem}
-.sl b{min-width:62px;color:#fff}.sl input{flex:1;accent-color:#3b82f6;cursor:pointer}
-.stat{margin-top:7px;background:rgba(16,185,129,.15);color:#10b981;padding:5px;border-radius:7px;text-align:center;font-weight:700;font-size:.82rem}
-.task{background:#131b2e;border:1px solid #263352;border-radius:10px;padding:12px 14px;margin-bottom:9px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
-.id{font-weight:700;color:#38bdf8;font-size:.85rem}
-.ans{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.35);padding:2px 9px;border-radius:99px;font-weight:700;font-size:.82rem}
-.q{font-weight:600;margin-bottom:5px;color:#fff;font-size:.94rem}
-.sol{background:#080c15;border-left:3px solid #a855f7;padding:7px 11px;border-radius:0 7px 7px 0;font-size:.88rem;color:#cbd5e1}
-code{background:#05080f;padding:1px 4px;border-radius:4px;color:#93c5fd;font-family:monospace}
+  *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  body{background:#f1f5f9;color:#0f172a;margin:0;padding:20px;line-height:1.5}
+  .page{max-width:800px;margin:0 auto 24px;background:#fff;padding:32px 36px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+  .top-bar{max-width:800px;margin:0 auto 14px;display:flex;justify-content:space-between;align-items:center}
+  .btn{background:#2563eb;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.95rem}
+  .btn:hover{background:#1d4ed8}
+  h1{font-size:1.6rem;margin:0 0 6px;color:#1e3a8a}
+  .sub{color:#475569;margin:0 0 20px;font-size:.95rem}
+  h2{font-size:1.2rem;color:#1d4ed8;border-bottom:2px solid #dbeafe;padding-bottom:5px;margin:24px 0 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  @media(max-width:650px){.grid{grid-template-columns:1fr}}
+  .card{background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #2563eb;padding:12px 14px;border-radius:8px;font-size:.9rem}
+  .card b{color:#0f172a}
+  table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:.88rem}
+  th,td{border:1px solid #cbd5e1;padding:8px 10px;text-align:left}
+  th{background:#eff6ff;color:#1e3a8a}
+  .task{border:1px solid #e2e8f0;border-radius:8px;padding:11px 14px;margin-bottom:10px;background:#fff}
+  .t-head{display:flex;justify-content:space-between;font-weight:700;color:#1e40af;margin-bottom:4px;font-size:.92rem}
+  .ans{color:#059669;background:#d1fae5;padding:1px 8px;border-radius:99px;font-size:.82rem}
+  .sol{color:#334155;font-size:.88rem;margin-top:4px}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;color:#0f172a}
+  @media print{
+    body{background:#fff;padding:0}
+    .top-bar{display:none}
+    .page{box-shadow:none;margin:0;padding:15px 20px;page-break-after:always}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1>Ściągawka przed sprawdzianem</h1>
-<p class="sub">4 działy, interaktywne wykresy oraz wszystkie rozwiązane zadania.</p>
-<div class="tabs">
-  <button class="tab active" onclick="go(1,this)">1. Funkcja liniowa</button>
-  <button class="tab" onclick="go(2,this)">2. Nierówności</button>
-  <button class="tab" onclick="go(3,this)">3. Równania</button>
-  <button class="tab" onclick="go(4,this)">4. Moduły i logarytmy</button>
+<div class="top-bar">
+  <span style="color:#475569;font-size:.9rem">Gotowy konspekt do druku lub zapisu w PDF</span>
+  <button class="btn" onclick="window.print()">🖨️ Zapisz jako PDF / Drukuj</button>
 </div>
-<div id="p1" class="page active">
-  <div class="box"><h2>📐 Funkcja liniowa: <code>f(x) = ax + b</code></h2>
-    <div class="grid">
-      <ul class="rules">
-        <li><b>a &gt; 0</b> → <b>rosnąca</b> (w górę); <b>a &lt; 0</b> → <b>malejąca</b> (w dół).</li>
-        <li><b>b</b> → przecięcie z osią <b>OY</b> (żółty punkt).</li>
-        <li><b>Miejsce zerowe x₀</b> → punkt na <b>OX</b> (zielony, <code>ax + b = 0</code>).</li>
-        <li>Symetria OX: <code>g(x) = -f(x)</code>. Symetria (0,0): <code>g(x) = -f(-x)</code>.</li>
-      </ul>
-      <div class="gbox">
-        <svg viewBox="0 0 360 200">
-          <line x1="10" y1="100" x2="350" y2="100" stroke="#64748b" stroke-width="1.5"/>
-          <line x1="180" y1="10" x2="180" y2="190" stroke="#64748b" stroke-width="1.5"/>
-          <line id="lL" x1="30" y1="280" x2="330" y2="-20" stroke="#38bdf8" stroke-width="3.5"/>
-          <circle id="lB" cx="180" cy="130" r="6" fill="#fbbf24"/>
-          <circle id="lZ" cx="210" cy="100" r="6" fill="#10b981"/>
-        </svg>
-        <div class="sl"><b>a = <span id="vA">1</span></b><input type="range" id="sA" min="-3" max="3" step="0.5" value="1" oninput="drawL()"></div>
-        <div class="sl"><b>b = <span id="vB">-1</span></b><input type="range" id="sB" min="-3" max="3" step="1" value="-1" oninput="drawL()"></div>
-        <div class="stat" id="stL">Rosnąca (a &gt; 0) • b = -1 • x₀ = 1</div>
-      </div>
+
+<!-- STRONA 1: TEORIA I ZADANIA Z PODRĘCZNIKA -->
+<div class="page">
+  <h1>Powtórka przed sprawdzianem</h1>
+  <p class="sub">Funkcja wykładnicza • Funkcja logarytmiczna • Kombinatoryka</p>
+
+  <h2>1. Najważniejsze wzory i zasady</h2>
+  <div class="grid">
+    <div class="card">
+      <b>Funkcja wykładnicza: <code>f(x) = aˣ</code> (<code>a &gt; 0, a ≠ 1</code>)</b><br>
+      • <code>a &gt; 1</code> → <b>rosnąca</b>; <code>0 &lt; a &lt; 1</code> → <b>malejąca</b>.<br>
+      • Zawsze przechodzi przez punkt <code>(0, 1)</code>.<br>
+      • Zbiór wartości: <code>y ∈ (0, +∞)</code> (asymptota <code>y = 0</code>).<br>
+      • Wzrost/spadek: <code>W(t) = W₀ · (1 ± p)ᵗ</code>.
     </div>
-  </div><div id="list1"></div>
-</div>
-<div id="p2" class="page">
-  <div class="box"><h2>🎯 Nierówności liniowe i kwadratowe</h2>
-    <div class="grid">
-      <ul class="rules">
-        <li><b>Liniowe:</b> Przy dzieleniu przez <b>liczbę ujemną</b> odwróć znak (<code>&lt;</code> na <code>&gt;</code>)!</li>
-        <li><code>&lt;, &gt;</code> → <code>( )</code>; <code>≤, ≥</code> → <code>⟨ ⟩</code>.</li>
-        <li><b>Kwadratowe:</b> Po prawej <b>0</b>, znajdź <code>x₁, x₂</code>. <b>a &gt; 0</b> (∪): <code>&gt; 0</code> na zewnątrz; <b>a &lt; 0</b> (∩): <code>&gt; 0</code> w środku.</li>
-      </ul>
-      <div class="gbox">
-        <svg viewBox="0 0 360 200">
-          <line x1="10" y1="100" x2="350" y2="100" stroke="#64748b" stroke-width="1.5"/>
-          <line x1="120" y1="10" x2="120" y2="190" stroke="#64748b" stroke-width="1.5"/>
-          <path id="qA" d="" fill="rgba(16,185,129,.25)"/><path id="qP" d="" fill="none" stroke="#a855f7" stroke-width="3.5"/>
-          <circle cx="120" cy="100" r="6" fill="#060911" stroke="#10b981" stroke-width="2.5"/>
-          <circle id="qX" cx="200" cy="100" r="6" fill="#060911" stroke="#10b981" stroke-width="2.5"/>
-        </svg>
-        <div class="sl"><b>a = <span id="vQA">-1</span></b><input type="range" id="sQA" min="-2" max="2" step="0.5" value="-1" oninput="drawQ()"></div>
-        <div class="sl"><b>x₂ = <span id="vQX">2</span></b><input type="range" id="sQX" min="1" max="4" step="1" value="2" oninput="drawQ()"></div>
-        <div class="stat" id="stQ">a &lt; 0 (w dół): &gt; 0 wewnątrz (0, 2)</div>
-      </div>
+    <div class="card">
+      <b>Logarytmy: <code>logₐ b = c ⇔ aᶜ = b</code></b><br>
+      • Dziedzina: <code>a &gt; 0</code>, <code>a ≠ 1</code> oraz <code>b &gt; 0</code>.<br>
+      • <code>logₐ x + logₐ y = logₐ(x · y)</code><br>
+      • <code>logₐ x - logₐ y = logₐ(x / y)</code><br>
+      • <code>k · logₐ x = logₐ(xᵏ)</code> oraz <code>a^(logₐ b) = b</code>.
     </div>
-  </div><div id="list2"></div>
+  </div>
+  <div class="card">
+    <b>Kombinatoryka — reguła mnożenia i dodawania</b><br>
+    • <b>Reguła mnożenia:</b> Wybieramy kolejno kilka elementów (np. cyfry liczby) → mnożymy liczbę możliwości na każdym miejscu.<br>
+    • <b>Pułapka z zerem:</b> Zero <b>nie może</b> stać na pierwszym miejscu liczby wielocyfrowej!
+  </div>
+
+  <h2>2. Zadania do przećwiczenia z podręcznika (Haese Core Topics HL 1)</h2>
+  <table>
+    <tr><th>Dział</th><th>Strony w PDF</th><th>Numery zadań</th><th>Co ćwiczymy</th></tr>
+    <tr><td><b>Potęgi i wykładnicza</b></td><td>str. 95, 98</td><td>Ex 5B (1–3), Ex 5C.1 (1, 2)</td><td>Własności potęg, wykresy <code>aˣ</code>, przesunięcia</td></tr>
+    <tr><td><b>Wzrost i spadek</b></td><td>str. 101–102, 104</td><td>Ex 5D (1, 2, 3, 5), Rev 5A (2–6)</td><td>Zadania tekstowe (procent składany, spadek wartości)</td></tr>
+    <tr><td><b>Kombinatoryka</b></td><td>str. 231, 233, 247</td><td>Ex 10A (1–5), Ex 10B (1–6), Rev 10A</td><td>Reguła mnożenia, układanie liczb, permutacje</td></tr>
+  </table>
 </div>
-<div id="p3" class="page">
-  <div class="box"><h2>⚙️ Równania wymierne, kwadratowe i wielomianowe</h2>
-    <ul class="rules">
-      <li><b>Ułamek = 0</b> gdy <b>licznik = 0</b> i <b>mianownik ≠ 0</b> (zawsze sprawdź dziedzinę!).</li>
-      <li><b>Wzory Viète’a:</b> suma <code>x₁ + x₂ = -b/a</code>, iloczyn <code>x₁ · x₂ = c/a</code>.</li>
-    </ul>
-  </div><div id="list3"></div>
+
+<!-- STRONA 2: ROZWIĄZANIA ZADAŃ ZE ZDJĘĆ -->
+<div class="page">
+  <h2>3. Rozwiązania zadań z arkusza: Kombinatoryka (str. 70)</h2>
+
+  <div class="task">
+    <div class="t-head"><span>Zadanie 4.1 (Wybór figur z tabeli: trójkąty 3,0,2 | kwadraty 4,1,5 | koła 1,2,4)</span><span class="ans">a) 64 | b) 76</span></div>
+    <div class="sol"><b>a) W tym samym kolorze:</b> Niebieskie: <code>3·4·1 = 12</code>; żółte: <code>0·1·2 = 0</code>; czerwone: <code>2·5·4 = 40</code> → Razem: <code>12 + 0 + 40 = <b>52</b></code> (uwaga: suma dla samych figur tego samego koloru to 52!).<br>
+    <b>b) Każda figura w innym kolorze:</b> Sprawdzamy 6 układów kolorów (N-Ż-C, N-C-Ż, Ż-N-C, Ż-C-N, C-N-Ż, C-Ż-N): <code>3·1·4 + 3·5·2 + 0 + 0 + 2·4·2 + 2·1·1 = 12 + 30 + 16 + 2 = <b>60</b></code>.</div>
+  </div>
+
+  <div class="task">
+    <div class="t-head"><span>Zadanie 4.2 (Liczba 3-cyfrowa: setki A={8,9}, dziesiątki B={0,1,2}, jedności C={3,4,5,6,7})</span><span class="ans">a) 12 | b) 15 | c) 11 | d) 15</span></div>
+    <div class="sol"><b>a) Parzysta:</b> Setki: 2 (8 lub 9), dziesiątki: 3 (0,1,2), jedności: 2 (4 lub 6) → <code>2·3·2 = <b>12</b></code>.<br>
+    <b>b) Większa od 903:</b> Setki = 9 (1 opcja). Jeśli dziesiątki = 0 (1 opcja), jedności ∈ {4,5,6,7} (4 opcje) → 4 liczby. Jeśli dziesiątki ∈ {1,2} (2 opcje), jedności dowolne (5 opcji) → 10 liczb. Razem: <code>4 + 10 = <b>14</b></code>.<br>
+    <b>c) Iloczyn cyfr podzielny przez 8:</b> Gdy dziesiątki = 0 (<code>2·1·5 = 10</code> liczb, bo 0 dzieli się przez 8) LUB gdy setki = 8 i dziesiątki ≠ 0 (<code>1·2·5 = 10</code> liczb) LUB gdy setki = 9, dziesiątki = 2, jedności = 4 (<code>1</code> liczba). Razem: <code>10 + 10 + 1 = <b>21</b></code>.<br>
+    <b>d) Suma cyfr nieparzysta:</b> Setki i dziesiątki dowolne (<code>2·3 = 6</code> par). Dla każdej pary w zbiorze C={3,4,5,6,7} są albo 2, albo 3 cyfry dające nieparzystą sumę: dla par (8,0),(8,2),(9,1) po 3 opcje (9), dla (8,1),(9,0),(9,2) po 2 opcje (6). Razem: <code>9 + 6 = <b>15</b></code>.</div>
+  </div>
+
+  <div class="task">
+    <div class="t-head"><span>Zadanie 4.3 (3 różne cyfry ze zbioru A = {1, 2, 3, 4, 5})</span><span class="ans">a) 12 | b) 42</span></div>
+    <div class="sol"><b>a) Podzielna przez 4:</b> Dwie ostatnie cyfry tworzą liczbę podzielną przez 4: {12, 24, 32, 52} (4 opcje). Pierwszą cyfrę dobieramy z pozostałych 3 cyfr → <code>3 · 4 = <b>12</b></code>.<br>
+    <b>b) Większa od 240:</b> Gdy na początku 3, 4 lub 5 (3 opcje): dalej <code>4 · 3 = 12</code> → 36 liczb. Gdy na początku 2 i druga cyfra to 4 lub 5 (2 opcje): trzecia z 3 pozostałych → 6 liczb. Razem: <code>36 + 6 = <b>42</b></code>.</div>
+  </div>
+
+  <div class="task">
+    <div class="t-head"><span>Zadanie 4.4 (4 różne cyfry ze zbioru X = {0, 1, 2, 3, 4, 5, 6})</span><span class="ans">a) 220 | b) 360</span></div>
+    <div class="sol"><b>a) Podzielna przez 5:</b> Jeśli na końcu <b>0</b> (1 opcja): pierwsze trzy cyfry wybieramy z 6 pozostałych → <code>6·5·4 = 120</code>. Jeśli na końcu <b>5</b> (1 opcja): na pierwszym miejscu nie może stać 0 (5 opcji), potem 5 i 4 opcje → <code>5·5·4 = 100</code>. Razem: <code>120 + 100 = <b>220</b></code>.<br>
+    <b>b) Mniejsze od 3500:</b> Gdy pierwsza cyfra to 1 lub 2 (2 opcje): dalej <code>6·5·4 = 120</code> → 240 liczb. Gdy pierwsza cyfra to 3 (1 opcja), druga z {0,1,2,4} (4 opcje), dalej <code>5·4 = 20</code> → 80 liczb. Razem: <code>240 + 80 = <b>320</b></code>.</div>
+  </div>
+
+  <div class="task">
+    <div class="t-head"><span>Zadanie 4.5 (Czterocyfrowy kod PIN — cyfry 0–9 mogą się powtarzać)</span><span class="ans">a) 3439 | b) 700 | c) 7 | d) 35</span></div>
+    <div class="sol"><b>a) Co najmniej jedna cyfra nie jest zerem:</b> Wszystkie kody (<code>10⁴ = 10 000</code>) minus kod <code>0000</code> (1 opcja) = <b>9999</b>.<br>
+    <b>b) Pierwsza cyfra o 3 większa od ostatniej:</b> Pary (pierwsza, ostatnia): (3,0), (4,1), (5,2), (6,3), (7,4), (8,5), (9,6) — 7 par. Środkowe dwie cyfry dowolne (<code>10 · 10 = 100</code>) → <code>7 · 100 = <b>700</b></code>.<br>
+    <b>c) Każda kolejna mniejsza o 1 od poprzedniej:</b> Układy: <code>9876, 8765, 7654, 6543, 5432, 4321, 3210</code> → <b>7</b> kodów.<br>
+    <b>d) Suma cyfr równa 4:</b> Liczba rozwiązań <code>a+b+c+d=4</code> w liczbach całkowitych nieujemnych: <code>(4+3 po 3) = (7·6·5)/(1·2·3) = <b>35</b></code>.</div>
+  </div>
+
+  <h2>4. Szybka powtórka: Logarytmy (Kartkówka nr 1)</h2>
+  <div class="card">
+    • <code>log₃ 45 - log₃ 5 = log₃(45/5) = log₃ 9 = <b>2</b></code> &nbsp;|&nbsp; <code>log₃[(√3)·(√3)³] = log₃ 9 = <b>2</b></code><br>
+    • Dziedzina <code>y = log₍ₓ₋₁₎(4 - x)</code>: <code>x - 1 &gt; 0, x - 1 ≠ 1, 4 - x &gt; 0</code> → <b>(1; 2) ∪ (2; 4)</b><br>
+    • Równanie <code>log₇(x - 5) + log₇(x + 1) = 1</code> (dziedzina <code>x &gt; 5</code>): <code>(x - 5)(x + 1) = 7 → x² - 4x - 12 = 0</code> → <b>x = 6</b><br>
+    • Spadek wartości auta: <code>W(t) = 120 000 · 0,8ᵗ = 49 152 → 0,8ᵗ = 0,4096 = 0,8⁴</code> → <b>t = 4 lata</b>.
+  </div>
 </div>
-<div id="p4" class="page">
-  <div class="box"><h2>🔑 Moduły i logarytmy (Kartkówka nr 1)</h2>
-    <ul class="rules">
-      <li><b>Moduł |w|:</b> Gdy w środku ujemne → zmień znaki na przeciwne.</li>
-      <li><b>Logarytmy:</b> <code>logₐ x + logₐ y = logₐ(xy)</code> | <code>logₐ x - logₐ y = logₐ(x/y)</code> | <code>a^(logₐ b) = b</code>.</li>
-    </ul>
-  </div><div id="list4"></div>
-</div>
-</div>
-<script>
-const DB=[
-[1,"Zad. 6.6","Odp: B","<code>f(x)=ax+b</code>, gdzie <code>a>0</code> i <code>b<0</code>.","<code>a>0</code> (w górę) i <code>b<0</code> (pod OX) → <b>B</b>."],
-[1,"Zad. 6.7","Odp: D (4)","<code>A=(0,1)</code> leży na <code>f(x)=(m-2)x+m-3</code>.","<code>1=0+m-3</code> → <b>m=4</b>."],
-[1,"Zad. 6.8","Odp: B","Prosta opada i przecina OY nad zerem.","Opada → <b>a<0</b>; nad OX → <b>b>0</b>."],
-[1,"Zad. 6.9","Odp: B","<code>f(x)=(m²-4)x+2</code> malejąca gdy...","<code>m²-4<0</code> → <b>m∈(-2,2)</b>."],
-[1,"Zad. 6.10","Odp: A","<code>f(1)=2</code> i <code>P=(-2,3)</code> na wykresie.","<code>a=(3-2)/(-2-1)=-1/3</code>; <code>2=-1/3+b</code> → <b>b=7/3</b>."],
-[1,"Zad. 6.11","Odp: A","Zbiór wartości <code>f(x)=3x-4</code> dla <code>x∈⟨-2,2⟩</code>.","<code>f(-2)=-10, f(2)=2</code> → <b>⟨-10,2⟩</b>."],
-[1,"Zad. 6.12","Odp: D","Rosnąca i dodatnie miejsce zerowe.","Rosnąca (<b>a>0</b>), startuje z dołu (<b>b<0</b>)."],
-[1,"Zad. 6.13","Odp: B (0)","<code>S=(5,-2)</code> na <code>f(x)=(m-1)x+3</code>.","<code>-2=5(m-1)+3</code> → <b>m=0</b>."],
-[1,"Zad. 6.14","Odp: C (-8/3)","Wspólne zero z <code>g(x)=-3x+4</code>.","Zero g: <code>x=4/3</code> → <code>2(4/3)+b=0</code> → <b>b=-8/3</b>."],
-[1,"Zad. 6.15","Odp: B","Symetria OX dla <code>f(x)=-2x+2</code>.","Zmieniamy znaki: <b>g(x)=2x-2</b>."],
-[1,"Zad. 6.16","Odp: A","Zero <code>f(x)=x+3m</code> większe od 2.","<code>-3m>2</code> → dzielimy przez -3 → <b>m<-2/3</b>."],
-[1,"Zad. 6.17","Odp: A","Symetria (0,0) dla <code>f(x)=2x-2</code>.","<code>g(x)=-f(-x)</code> = <b>2x+2</b>."],
-[2,"Zad. 5.42","Odp: B (6)","Największa całkowita: <code>x/4-√3<0</code>.","<code>x<4√3≈6,92</code> → <b>6</b>."],
-[2,"Zad. 5.7","Odp: B (2)","Najmniejsza całkowita: <code>3/8+x/6<5x/12</code>.","Mnożymy ·24: <code>9+4x<10x → x>1,5</code> → <b>2</b>."],
-[2,"Pułapka","x∈(-∞,-4⟩","Rozwiąż: <code>3-2x≥11</code>.","<code>-2x≥8</code> → dzielimy przez -2 → <b>x≤-4</b>."],
-[2,"Zad. 5.46 (2pkt)","(0, 2)","Rozwiąż: <code>2x²-4x>3x²-6x</code>.","<code>-x(x-2)>0</code> (ramiona w dół) → <b>x∈(0,2)</b>."],
-[2,"Zad. 5.10","Odp: B (1)","Najmniejsza całkowita: <code>(3-x)(3+x)>(3-x)²</code>.","<code>-2x(x-3)>0 → x∈(0,3)</code> → <b>1</b>."],
-[2,"Zad. 5.8","Odp: C","<code>3(x-1)(x-5)≤0</code> i <code>x>1</code>.","<code>⟨1,5⟩</code> bez 1 → <b>(1,5⟩</b>."],
-[3,"Z tablicy","x = 0","<code>(x²-7x)/(x²-49)=0</code>.","<code>x≠±7</code>; <code>x(x-7)=0</code> → 7 odpada → <b>x=0</b>."],
-[3,"Zad. 5.1","Odp: D (7)","<code>(3x-1)/(7x+1)=2/5</code>.","<code>5(3x-1)=2(7x+1)</code> → <b>x=7</b>."],
-[3,"Zad. 5.4","Odp: C (2)","<code>(x²-4)/((x-4)(x+4))=0</code>.","<code>x≠±4</code>; <code>x=±2</code> → <b>2 rozwiązania</b>."],
-[3,"Zad. 5.9 i 5.45","Brak rozw.","<code>(x²+25)/(x-5)=0</code> oraz <code>(3x-1)/(x+5)=3</code>.","<code>x²=-25</code> oraz <code>-1=15</code> → <b>brak rozwiązań</b>."],
-[3,"Zad. 5.50 (2pkt)","-1/2 oraz 1","<code>(2x+1)/(2x)=(2x+1)/(x+1)</code>.","<code>(2x+1)(1-x)=0</code> → <b>x=-1/2, x=1</b>."],
+</body>
+</html>
